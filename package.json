@@ -11,7 +11,9 @@
     "url": "git://github.com/Astrak/minigl.git"
   },
   "keywords": [
-    "WebGL"
+    "3D",
+    "matrices",
+    "vectors"
   ],
   "author": "Astrak"
 }
