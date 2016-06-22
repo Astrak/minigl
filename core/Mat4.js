@@ -245,9 +245,13 @@ function Mat4 () {
 		m.el[ 12 ] = t[ 3 ]; m.el[ 13 ] = t[ 7 ];m.el[ 14 ] = t[ 11 ];
 		t = undefined;
 		return m;
-	}
+	};
 
-	this.reset();
+	if ( arguments.length === 0 ) {
+		m.reset();
+	} else if ( arguments.length === 1 ) {
+		m.copy( arguments[ 0 ] );
+	}
 
 	return this;
 }

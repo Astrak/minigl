@@ -5,26 +5,6 @@ function Vec3 () {
 		vx, vy, vz, 
 		wx, wy, wz;
 
-	if ( arguments.length === 3 ) {//creates from coord
-		this.x = arguments[ 0 ];
-		this.y = arguments[ 1 ]; 
-		this.z = arguments[ 2 ];
-	} else if ( arguments.length === 1 ) {
-		if ( arguments[ 0 ].hasOwnProperty( 'el' ) ) {//creates from Mat4 !
-			this.x = arguments[ 0 ].el[ 12 ];
-			this.y = arguments[ 0 ].el[ 13 ];
-			this.z = arguments[ 0 ].el[ 14 ];
-		} else {//creates from vec3 = quick clone !
-			this.x = arguments[ 0 ].x;
-			this.y = arguments[ 0 ].y; 
-			this.z = arguments[ 0 ].z;
-		}
-	} else {
-		this.x = 0;
-		this.y = 0; 
-		this.z = 0;
-	}
-
 	this.set = function ( x, y, z ) {
 		v.x = x, v.y = y, v.z = z;
 		return v;
@@ -76,6 +56,22 @@ function Vec3 () {
 	this.dot = function ( w ) {
 		v.x *= w.x, v.y *= w.y, v.z *= w.z;
 		return v;
+	};
+
+	if ( arguments.length === 3 ) {//creates from coord
+		v.x = arguments[ 0 ];
+		v.y = arguments[ 1 ]; 
+		v.z = arguments[ 2 ];
+	} else if ( arguments.length === 1 ) {
+		if ( arguments[ 0 ].hasOwnProperty( 'el' ) ) {//creates from Mat4
+			v.x = arguments[ 0 ].el[ 12 ];
+			v.y = arguments[ 0 ].el[ 13 ];
+			v.z = arguments[ 0 ].el[ 14 ];
+		} else {
+			v.copy( arguments[ 0 ] );//clones from Vec3
+		}
+	} else {
+		v.x = v.y = v.z = 0;
 	}
 
 	return this;
@@ -327,9 +323,13 @@ function Mat4 () {
 		m.el[ 12 ] = t[ 3 ]; m.el[ 13 ] = t[ 7 ];m.el[ 14 ] = t[ 11 ];
 		t = undefined;
 		return m;
-	}
+	};
 
-	this.reset();
+	if ( arguments.length === 0 ) {
+		m.reset();
+	} else if ( arguments.length === 1 ) {
+		m.copy( arguments[ 0 ] );
+	}
 
 	return this;
 }
