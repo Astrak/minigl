@@ -26,8 +26,8 @@ setPosition( Vec3 | x,y,z ) / lookAt( Vec3 | x,y,z ) / perspective( angle, aspec
 ### Chainable
 
 	var camera = new Mat4()
-			.setPosition( 0, 200, 1000 )
-			.lookAt( 0, 0, 15 )
+			.setPosition( 0, 200, 1000 )          //or Vec3
+			.lookAt( 0, 0, 15 )                   //or Vec3
 			.inverse();
 
 	gl.uniformMatrix4fv( cameraInverse, false, camera.el );
